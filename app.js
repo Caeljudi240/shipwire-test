@@ -89,3 +89,8 @@ function addTomato() {
   renderCount();
 }
 renderCount();
+
+// R resets the timer.
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "r" && e.target === document.body) $reset.click();
+});

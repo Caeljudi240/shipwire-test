@@ -23,9 +23,23 @@ function render() {
   document.title = `${format(remaining)} · Tomate`;
 }
 
+// Short beep, generated on the fly (no audio file).
+function beep() {
+  const ctx = new AudioContext();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.frequency.value = phase === "work" ? 880 : 660;
+  gain.gain.setValueAtTime(0.2, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime + 0.6);
+}
+
 function tick() {
   remaining -= 1;
   if (remaining <= 0) {
+    beep();
     phase = phase === "work" ? "break" : "work";
     remaining = phase === "work" ? WORK : BREAK;
   }

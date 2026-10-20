@@ -40,6 +40,7 @@ function tick() {
   remaining -= 1;
   if (remaining <= 0) {
     beep();
+    notifyEnd(phase);
     if (phase === "work") addTomato();
     phase = phase === "work" ? "break" : "work";
     remaining = phase === "work" ? WORK : BREAK;
@@ -94,3 +95,12 @@ renderCount();
 document.addEventListener("keydown", (e) => {
   if (e.key.toLowerCase() === "r" && e.target === document.body) $reset.click();
 });
+
+// Browser notification at the end of each phase (asked on first start).
+$start.addEventListener("click", () => {
+  if ("Notification" in window && Notification.permission === "default") Notification.requestPermission();
+}, { once: true });
+function notifyEnd(endedPhase) {
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  new Notification(endedPhase === "work" ? "Pause ! 5 minutes" : "On s'y remet : 25 minutes");
+}

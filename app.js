@@ -1,5 +1,5 @@
-const WORK = 25 * 60;
-const BREAK = 5 * 60;
+const WORK = window.TOMATE_CONFIG.work;
+const BREAK = window.TOMATE_CONFIG.break;
 
 let remaining = WORK;
 let phase = "work";

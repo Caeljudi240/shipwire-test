@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, sans-serif;
+  background: #fff7f2;
+  color: #2b1d16;
+}
+
+.timer {
+  text-align: center;
+}
+
+.phase {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #c2410c;
+}
+
+.time {
+  font-size: 6rem;
+  font-weight: 800;
+  margin: 0.2em 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.controls button {
+  font-size: 1rem;
+  padding: 0.6em 1.4em;
+  margin: 0 0.3em;
+  border: 0;
+  border-radius: 999px;
+  background: #ea580c;
+  color: white;
+  cursor: pointer;
+}
+
+.controls button#reset {
+  background: #e7d8cf;
+  color: #2b1d16;
+}

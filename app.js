@@ -40,6 +40,7 @@ function tick() {
   remaining -= 1;
   if (remaining <= 0) {
     beep();
+    if (phase === "work") addTomato();
     phase = phase === "work" ? "break" : "work";
     remaining = phase === "work" ? WORK : BREAK;
   }
@@ -75,3 +76,16 @@ $reset.addEventListener("click", () => {
 });
 
 render();
+
+// Tomatoes completed today, kept in localStorage.
+const $count = document.getElementById("count");
+const todayKey = () => `tomate-${new Date().toISOString().slice(0, 10)}`;
+function renderCount() {
+  const n = Number(localStorage.getItem(todayKey()) || 0);
+  $count.textContent = n ? `${n} tomate${n > 1 ? "s" : ""} aujourd'hui` : "";
+}
+function addTomato() {
+  localStorage.setItem(todayKey(), Number(localStorage.getItem(todayKey()) || 0) + 1);
+  renderCount();
+}
+renderCount();

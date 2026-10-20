@@ -32,7 +32,7 @@ function tick() {
   render();
 }
 
-$start.addEventListener("click", () => {
+function toggle() {
   if (timer) {
     clearInterval(timer);
     timer = null;
@@ -40,6 +40,16 @@ $start.addEventListener("click", () => {
     timer = setInterval(tick, 1000);
   }
   render();
+}
+
+$start.addEventListener("click", toggle);
+
+// Space bar starts / pauses the timer.
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space" && e.target === document.body) {
+    e.preventDefault();
+    toggle();
+  }
 });
 
 $reset.addEventListener("click", () => {
